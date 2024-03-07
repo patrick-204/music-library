@@ -31,32 +31,84 @@ const library = {
 // p01: Coding Music - 2 tracks
 // p02: Other Playlist - 1 tracks
 const printPlaylists = function() {
+       let arrPlaylist1 = [];
+       let arrPlaylist2 = [];
 
+       arrPlaylist1.push(Object.values(library.playlists.p01));
+       arrPlaylist2.push(Object.values(library.playlists.p02));
+
+       console.log(arrPlaylist1[0] + ": " + arrPlaylist1[1] + " - " + arrPlaylist1[2]);
+       console.log(arrPlaylist2[0] + ": " + arrPlaylist2[1] + " - " + arrPlaylist2[2]);
 }
 
+// printPlaylists();
 
 // prints a list of all tracks, using the following format:
 // t01: Code Monkey by Jonathan Coulton (Thing a Week Three)
 // t02: Model View Controller by James Dempsey (WWDC 2003)
 // t03: Four Thirty-Three by John Cage (Woodstock 1952)
 const printTracks = function() {
+       let arrTrack = [];
 
-}
+       arrTrack.push(Object.values(library.tracks.t01));
+       arrTrack.push(Object.values(library.tracks.t02));
+       arrTrack.push(Object.values(library.tracks.t03));
 
+       for (const track in arrTrack) {
+         console.log(arrTrack[track][0] + ": " + arrTrack[track][1] + " by " + arrTrack[track][2] + " (" + arrTrack[track][3] + ")");
+       }
+};
+
+// printTracks();
 
 // prints a list of tracks for a given playlist, using the following format:
 // p01: Coding Music - 2 tracks
 // t01: Code Monkey by Jonathan Coulton (Thing a Week Three)
 // t02: Model View Controller by James Dempsey (WWDC 2003)
 const printPlaylist = function(playlistId) {
+       let arrList = [];
+       let arrTrack = [];
+       let playlistValues = Object.values(playlistId);
 
-}
+       for (play of playlistValues) {
+         if (Array.isArray(play)) {
+           for (single of play) {
+             arrList.push(single);
+           }
+         } else {
+              arrList.push(play);
+         }
+       }
+
+       // console.log the playlist
+       console.log(arrList[0] + ": " + arrList[1] + " - " + arrList[2] + ", " + arrList[3]);
+
+       arrTrack.push(Object.values(library.tracks.t01));
+       arrTrack.push(Object.values(library.tracks.t02));
+       arrTrack.push(Object.values(library.tracks.t03));
+
+       let trackStore = [];
+       for (const track of arrTrack) {
+              for (const single in track) {
+                     if (track[0] === arrList[single]) {
+                            trackStore = Object.values(library.tracks[arrList[single]])
+                            console.log(trackStore[0] + ": " + trackStore[1] + " by " + trackStore[2] + " (" + trackStore[3] + ")");
+                     }
+              }
+       }
+};
+
+const playlistId = library.playlists.p01;
+printPlaylist(playlistId);
 
 
 // adds an existing track to an existing playlist
 const addTrackToPlaylist = function(trackId, playlistId) {
 
+
 }
+
+// addTrackToPlaylist();
 
 
 // generates a unique id
