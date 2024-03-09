@@ -39,7 +39,7 @@ const printPlaylists = function() {
 
        console.log(arrPlaylist1[0] + ": " + arrPlaylist1[1] + " - " + arrPlaylist1[2]);
        console.log(arrPlaylist2[0] + ": " + arrPlaylist2[1] + " - " + arrPlaylist2[2]);
-}
+};
 
 // printPlaylists();
 
@@ -98,36 +98,77 @@ const printPlaylist = function(playlistId) {
        }
 };
 
-const playlistId = library.playlists.p01;
-printPlaylist(playlistId);
+// const playlistId = library.playlists.p01;
+// printPlaylist(playlistId);
 
 
 // adds an existing track to an existing playlist
 const addTrackToPlaylist = function(trackId, playlistId) {
+       let arrTrack = [];
+       let trackValues = Object.values(trackId);
 
+       for (const track of trackValues) {
+              if (Array.isArray(track)) {
+                for (const single of track) {
+                  arrTrack.push(single);
+                }
+              } else {
+                   arrTrack.push(track);
+              }
+         playlistId["tracks"].push(track);
+         break;
+       }
 
-}
+       console.log(playlistId["tracks"]);
+};
 
-// addTrackToPlaylist();
+// addTrackToPlaylist(library.tracks.t01, library.playlists.p01);
+// addTrackToPlaylist(library.tracks.t03, library.playlists.p01);
 
 
 // generates a unique id
 // (already implemented: use this for addTrack and addPlaylist)
 const generateUid = function() {
   return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
-}
+};
 
+// console.log(generateUid());
 
 // adds a track to the library
-const addTrack = function(name, artist, album) {
+const addTrack = function(name, artist, album) { 
+       const trackID = generateUid();
+       // console.log(typeof(trackID));
 
-}
+       const addTrack = {
+              id: trackID,
+              name: name,
+              artist: artist,
+              album: album
+       };
+
+       library.tracks[trackID] = addTrack;
+       // console.log(library.tracks[trackID]);
+       // console.log(library.tracks);
+};
+
+// addTrack("Tim", "John", "Tam");
 
 
 // adds a playlist to the library
 const addPlaylist = function(name) {
+       const playlistID = generateUid();
 
-}
+       const addPlaylist = {
+              id: playlistID,
+              name: name,
+              tracks: ["t04"]
+       };
+
+       library.playlists[playlistID] = addPlaylist;
+       console.log(library.playlists)
+};
+
+// addPlaylist("yeet");
 
 
 // STRETCH:
